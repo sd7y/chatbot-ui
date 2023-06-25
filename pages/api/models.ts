@@ -8,8 +8,9 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { key } = (await req.json()) as {
+    const { key, token } = (await req.json()) as {
       key: string;
+      token: string;
     };
 
     let url = `${OPENAI_API_HOST}/v1/models`;
@@ -20,6 +21,7 @@ const handler = async (req: Request): Promise<Response> => {
     const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
+        'Token': token,
         ...(OPENAI_API_TYPE === 'openai' && {
           Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
         }),
