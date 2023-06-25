@@ -97,6 +97,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           model: updatedConversation.model,
           messages: updatedConversation.messages,
           key: apiKey,
+          token: localStorage.getItem('token') || '',
           prompt: updatedConversation.prompt,
           temperature: updatedConversation.temperature,
         };

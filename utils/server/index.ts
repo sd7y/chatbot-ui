@@ -28,6 +28,7 @@ export const OpenAIStream = async (
   systemPrompt: string,
   temperature : number,
   key: string,
+  token: string,
   messages: Message[],
 ) => {
   let url = `${OPENAI_API_HOST}/v1/chat/completions`;
@@ -37,6 +38,7 @@ export const OpenAIStream = async (
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
+      'Token': token,
       ...(OPENAI_API_TYPE === 'openai' && {
         Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
       }),
