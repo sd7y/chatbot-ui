@@ -93,13 +93,16 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         });
         homeDispatch({ field: 'loading', value: true });
         homeDispatch({ field: 'messageIsStreaming', value: true });
+
         const chatBody: ChatBody = {
           model: updatedConversation.model,
           messages: updatedConversation.messages,
           key: apiKey,
-          token: localStorage.getItem('token') || '',
+          userToken: localStorage.getItem('userToken') || '',
           prompt: updatedConversation.prompt,
           temperature: updatedConversation.temperature,
+          conversationId: selectedConversation.id,
+          conversationName: selectedConversation.name,
         };
         const endpoint = getEndpoint(plugin);
         let body;

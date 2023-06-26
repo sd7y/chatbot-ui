@@ -27,8 +27,12 @@ const useApiService = () => {
 
   const getModels = useCallback(
     (params: GetModelsRequestProps, signal?: AbortSignal) => {
+      let selectedConversation:any = localStorage.getItem('selectedConversation') || {};
       return fetchService.post<GetModelsRequestProps>(`/api/models`, {
-        body: { key: params.key, token: localStorage.getItem('token') },
+        body: {
+          key: params.key,
+          userToken: localStorage.getItem('userToken')
+        },
         headers: {
           'Content-Type': 'application/json',
         },

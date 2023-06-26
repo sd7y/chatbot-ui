@@ -11,9 +11,11 @@ export interface ChatBody {
   model: OpenAIModel;
   messages: Message[];
   key: string;
-  token: string;
+  userToken: string;
   prompt: string;
   temperature: number;
+  conversationId: string;
+  conversationName: string;
 }
 
 export interface Conversation {
