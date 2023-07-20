@@ -30,7 +30,7 @@ export const useFetch = () => {
         : { 'Content-type': 'application/json' }),
     };
 
-    return fetch(requestUrl, { ...requestBody, headers, signal })
+    return fetch(requestUrl, { ...requestBody, headers, signal, redirect: 'manual' })
       .then((response) => {
         if (!response.ok) throw response;
 
@@ -51,6 +51,10 @@ export const useFetch = () => {
         return result;
       })
       .catch(async (err) => {
+        if (err.status === 401) {
+          window.location.href = err.headers.get('location');
+          return;
+        }
         const contentType = err.headers.get('content-type');
 
         const errResult =

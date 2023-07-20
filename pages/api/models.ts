@@ -19,6 +19,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const response = await fetch(url, {
+      redirect: 'manual',
       headers: {
         'Content-Type': 'application/json',
         'USER_TOKEN': userToken,
@@ -37,6 +38,11 @@ const handler = async (req: Request): Promise<Response> => {
     if (response.status === 401) {
       return new Response(response.body, {
         status: 500,
+        headers: response.headers,
+      });
+    } else if (response.status === 302) {
+      return new Response(response.body, {
+        status: 401,
         headers: response.headers,
       });
     } else if (response.status !== 200) {
