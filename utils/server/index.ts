@@ -40,7 +40,7 @@ export const OpenAIStream = async (
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
-      'USER_TOKEN': userToken,
+      'userTokenId': userToken,
       'CONVERSATION_ID': conversationId,
       'PROMPT_TOKENS': promptTokens + '',
       ...(OPENAI_API_TYPE === 'openai' && {

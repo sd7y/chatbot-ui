@@ -28,10 +28,26 @@ const useApiService = () => {
   const getModels = useCallback(
     (params: GetModelsRequestProps, signal?: AbortSignal) => {
       let selectedConversation:any = localStorage.getItem('selectedConversation') || {};
+
+      function getURLParameter(name) {
+        let url = window.location.search;
+        name = name.replace(/[[]]/g, '\\$&');
+        const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
+        const results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+        let userTokenId = getURLParameter('userTokenId');
+        if (userTokenId) {
+          history.replaceState({}, document.title, window.location.href.substring(0, window.location.href.indexOf('?')))
+          localStorage.setItem('userTokenId', userTokenId);
+        }
+
       return fetchService.post<GetModelsRequestProps>(`/api/models`, {
         body: {
           key: params.key,
-          userToken: localStorage.getItem('userToken')
+          userToken: localStorage.getItem('userTokenId') || ''
         },
         headers: {
           'Content-Type': 'application/json',

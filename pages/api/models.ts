@@ -22,7 +22,8 @@ const handler = async (req: Request): Promise<Response> => {
       redirect: 'manual',
       headers: {
         'Content-Type': 'application/json',
-        'USER_TOKEN': userToken,
+        'userTokenId': userToken,
+        'Referer': req.headers.get('Referer'),
         ...(OPENAI_API_TYPE === 'openai' && {
           Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
         }),
@@ -36,11 +37,6 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     if (response.status === 401) {
-      return new Response(response.body, {
-        status: 500,
-        headers: response.headers,
-      });
-    } else if (response.status === 302) {
       return new Response(response.body, {
         status: 401,
         headers: response.headers,
