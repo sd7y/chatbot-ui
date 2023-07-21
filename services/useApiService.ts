@@ -29,7 +29,7 @@ const useApiService = () => {
     (params: GetModelsRequestProps, signal?: AbortSignal) => {
       let selectedConversation:any = localStorage.getItem('selectedConversation') || {};
 
-      function getURLParameter(name) {
+      function getURLParameter(name:string) {
         let url = window.location.search;
         name = name.replace(/[[]]/g, '\\$&');
         const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);

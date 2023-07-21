@@ -23,7 +23,7 @@ const handler = async (req: Request): Promise<Response> => {
       headers: {
         'Content-Type': 'application/json',
         'userTokenId': userToken,
-        'Referer': req.headers.get('Referer'),
+        'Referer': req.headers.get('Referer') || '',
         ...(OPENAI_API_TYPE === 'openai' && {
           Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
         }),

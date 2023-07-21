@@ -52,7 +52,7 @@ export const useFetch = () => {
       })
       .catch(async (err) => {
         if (err.status === 401) {
-          err.json().then(data => window.location.href = data.loginUrl)
+          err.json().then((data:any) => window.location.href = data.loginUrl)
           return;
         }
         const contentType = err.headers.get('content-type');
