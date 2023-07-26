@@ -1,4 +1,4 @@
-import { IconFileExport, IconSettings } from '@tabler/icons-react';
+import {IconFileExport, IconSettings, IconUserCircle} from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -60,7 +60,13 @@ export const ChatbarSettings = () => {
         <Key apiKey={apiKey} onApiKeyChange={handleApiKeyChange} />
       ) : null}
 
-      {!serverSidePluginKeysSet ? <PluginKeys /> : null}
+      {/*{!serverSidePluginKeysSet ? <PluginKeys /> : null}*/}
+
+        <SidebarButton
+            text={t('User Usages')}
+            icon={<IconUserCircle size={18} />}
+            onClick={() => window.location.href = 'be/user/usages'}
+        />
 
       <SettingDialog
         open={isSettingDialogOpen}
