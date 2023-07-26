@@ -65,7 +65,7 @@ export const ChatbarSettings = () => {
         <SidebarButton
             text={t('User Usages')}
             icon={<IconUserCircle size={18} />}
-            onClick={() => window.location.href = 'be/user/usages'}
+            onClick={() => window.open('be/user/usages', '_blank')}
         />
 
       <SettingDialog
