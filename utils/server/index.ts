@@ -29,6 +29,7 @@ export const OpenAIStream = async (
   temperature : number,
   key: string,
   userToken: string,
+  headers: any,
   messages: Message[],
   conversationId: string,
   promptTokens: number
@@ -43,6 +44,8 @@ export const OpenAIStream = async (
       'userTokenId': userToken,
       'CONVERSATION_ID': conversationId,
       'PROMPT_TOKENS': promptTokens + '',
+      'Cookie': headers.get('Cookie') || '',
+      'Use-agent': headers.get('Use-agent') || '',
       ...(OPENAI_API_TYPE === 'openai' && {
         Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
       }),

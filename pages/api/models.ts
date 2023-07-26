@@ -24,6 +24,8 @@ const handler = async (req: Request): Promise<Response> => {
         'Content-Type': 'application/json',
         'userTokenId': userToken,
         'Referer': req.headers.get('Referer') || '',
+        'Cookie': req.headers.get('Cookie') || '',
+        'user-agent': req.headers.get('user-agent') || '',
         ...(OPENAI_API_TYPE === 'openai' && {
           Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
         }),

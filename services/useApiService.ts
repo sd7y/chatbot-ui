@@ -44,7 +44,7 @@ const useApiService = () => {
           localStorage.setItem('userTokenId', userTokenId);
         }
 
-      return fetchService.post<GetModelsRequestProps>(`/api/models`, {
+      return fetchService.post<GetModelsRequestProps>(`api/models`, {
         body: {
           key: params.key,
           userToken: localStorage.getItem('userTokenId') || ''
